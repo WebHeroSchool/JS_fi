@@ -3,8 +3,9 @@ const start = document.getElementById('start');
 const simple = document.querySelector('.simple_game');
 const middle = document.querySelector('.middle_game');
 const hight = document.querySelector('.hight_game');
-const cards = document.querySelectorAll('.card');
 const bugCard = document.createElement('img');
+const menu = document.getElementById('wrap')
+const container = document.getElementById ('container')
 bugCard.src = 'img/bug.png';
 
 
@@ -12,54 +13,45 @@ bugCard.src = 'img/bug.png';
 level.forEach(function(element) {
     element.addEventListener("click", function(){
       level.forEach(function(element){
-            element.classList.remove('.item_level_active')
+            element.classList.remove('item_level_active')
                   })
         element.classList.add('item_level_active');
       });
 
+
 //Старт игры.
 function startGame() {
-	const menu = document.getElementById('wrap');
 	menu.classList.add('hidden');
-  let choice;
-	let cardTable;
-	const arrCards = [];
+  start.addEventListener('click', startGame());
+  //Переход к карточному столу и создание карт выбранного уровня
+	switch (level) {
+    case 'simple':
+          numberCards = 3;
+         break;
 
-	choices.forEach(elem => {
-		if (elem.style.listStyle !== 'none') {
-			choice = elem;
-		};
-	});
+        case 'middle':
+          numberCards = 6;
 
-start.addEventListener('click', startGame);
+        break;
 
-  //Переход к карточному столу и создание массива карт выбранного уровня
-	switch (choice.textContent) {
-		case 'simple':
-			cardTable = simple;
-			createArrCards(0, 3);
-			break;
-		case 'middle':
-			cardTable = middle;
-			createArrCards(3, 9);
-			break;
-		case 'hight':
-			cardTable = hight;
-			createArrCards(9, 19);
+         case 'hight':
+          numberCards = 9;
+
+        break;
 	};
-	cardTable.classList.remove('hidden');
-	function createArrCards (max) {
-		for (let i=0 ; i<max; i++) {
-			arrCards.push(cards[i]);
-		};
+  createCard = () => {
+     let newCards = document.createElement('div');
+     newCards.classList = 'card_back';
+     container.append(newCards);
+     switch (numberCards) {
+       case 9:
+        container.classList.toggle("hight_game");
+        break;
+      }
   }
 
+
 // Рандомная Замена карты с gameOver на bugCard
-	const random = Math.floor(Math.random() * arrCards.length);
-	const backCard = arrCards[random].children[1];
-  backСard.src = 'img/front.png';
-	backCard.children[0].style.display = 'none';
-	backCard.append(bugCard);
-	bugCard.classList.add('card');
-}
+	const random = Math.floor(Math.random());
+};
 });
