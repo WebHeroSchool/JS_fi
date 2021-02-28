@@ -1,8 +1,5 @@
 const level = document.querySelectorAll('.item_level');
 const start = document.getElementById('start');
-const simple = document.querySelector('.simple_game');
-const middle = document.querySelector('.middle_game');
-const hight = document.querySelector('.hight_game');
 const bugCard = document.createElement('img');
 const menu = document.getElementById('wrap')
 const container = document.getElementById ('container')
@@ -21,8 +18,7 @@ level.forEach(function(element) {
 
 //Старт игры.
 function startGame() {
-	menu.classList.add('hidden');
-  start.addEventListener('click', startGame());
+	container.classList.add('hidden');
   //Переход к карточному столу и создание карт выбранного уровня
 	switch (level) {
     case 'simple':
@@ -42,13 +38,15 @@ function startGame() {
   createCard = () => {
      let newCards = document.createElement('div');
      newCards.classList = 'card_back';
-     container.append(newCards);
+     menu.append(newCards);
      switch (numberCards) {
        case 9:
-        container.classList.toggle("hight_game");
+        menu.classList.toggle("hight_game");
         break;
       }
+      createCard();
   }
+    start.addEventListener('click', startGame());
 
 
 // Рандомная Замена карты с gameOver на bugCard
