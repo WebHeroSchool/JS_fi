@@ -1,8 +1,7 @@
 const level = document.querySelectorAll('.item_level');
 const start = document.getElementById('start');
-const bugCard = document.createElement('img');
-const menu = document.getElementById('wrap')
-let numberCards = 3;
+const menu = document.getElementById('wrap');
+const  container = document.getElementById('container');
 
 
 // выбор уровня, добавление ромба
@@ -15,7 +14,7 @@ level.forEach(function(element) {
       })
     });
 
-
+// Страт игры, создание и вывод карт на экран
 start.addEventListener('click', function(){
   container.classList.add('hidden');
   menu.classList.remove('hidden');
@@ -33,28 +32,32 @@ start.addEventListener('click', function(){
           numberCards = 9;
         break;
   }
-  createCard = () => {
-     let newCards = document.createElement('div');
+  createCard = (numberCards) => {
+    let newCards = document.createElement('div');
      newCards.classList = 'card_back';
      menu.append(newCards);
-     switch (numberCards) {
-      case 3:
-       menu.classList.toggle("simple_game");
-       break;
-
-       case 6:
-       menu.classList.toggle("middle_game");
-       break;
-
-       case 9:
-        menu.classList.toggle("hight_game");
-        break;
+     menu.classList.add ('hight_game');
+  // рандомное расположение  и клики по картам.
+  function random() {
+      return Math.round(Math.random());
+    }
+  let numberClick = 0;
+      newCards.addEventListener ('click',   function showHide() {
+        ++numberClick;
+        if (numberClick % 2 !== 0) {
+        random () ===0 ? newCards.classList.add('card_front') : newCards.classList.add('card_bug')
+        newCards.classList.remove('card_back');
+      } else {
+          newCards.classList.add('card_front')
+           container.classList.toggle('hidden');
+   		     menu.classList.toggle('hight_game');
+           let cards = document.querySelectorAll('.card_front');
+   			cards.forEach(el => el.remove());
       }
-      function random() {
-          return Math.round(Math.random());
-        }
-      };
-      for (let i = 0; i < numberCards; i++ ) {
-       createCard()
-     }
     });
+  }
+
+         for (let i = 0; i < numberCards; i++ ) {
+          createCard(numberCards);
+        }
+})
