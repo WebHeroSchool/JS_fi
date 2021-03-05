@@ -32,24 +32,21 @@ function chooseLevel(){
           numberCards = 9;
         break;
   }
-}
-/*start.addEventListener('click', chooseLevel);*/
-
-
  createCard = () => {
     let newCards = document.createElement('div');
      newCards.classList = 'card_back';
-     newCards.classList.add ('card');
+      newCards.classList.add ('card');
      menu.classList.add ('hight_game');
      menu.append(newCards);
    }
+   for (let i = 0; i < numberCards; i++ ) {
+   createCard (numberCards);
+   }
+ }
 
    start.addEventListener('click', chooseLevel);
-   start.addEventListener ('click', () => {
-     for (let i = 0; i < numberCards; i++ ) {
-     createCard (numberCards);
-   }
- })
+
+ // рандом и клики по картам, завершение игры
 
 function random() {
     return Math.round(Math.random());
@@ -67,5 +64,5 @@ function random() {
   }
 }
 
-  let cards = document.querySelectorAll('card');
+  let cards = document.querySelectorAll('.card');
   cards.forEach(item => item.addEventListener('click', end));
