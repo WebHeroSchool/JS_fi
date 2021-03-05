@@ -42,27 +42,25 @@ function chooseLevel(){
    for (let i = 0; i < numberCards; i++ ) {
    createCard (numberCards);
    }
+
+   function random() {
+       return Math.round(Math.random());
+     }
+
+     let numberClick = 0;
+
+     function end () {
+     ++numberClick;
+     if (numberClick %2 !== 0) {
+     random () ===0 ? item.classList.add('card_front') : item.classList.add('card_bug')
+     item.classList.remove('card_back');
+     } else {
+     window.location.reload();
+     }
+   }
+
+   let cards = document.querySelectorAll('.card');
+   cards.forEach(item => item.addEventListener('click', end));
  }
 
    start.addEventListener('click', chooseLevel);
-
- // рандом и клики по картам, завершение игры
-
-function random() {
-    return Math.round(Math.random());
-  }
-
-  let numberClick = 0;
-
-  function end () {
-  ++numberClick;
-  if (numberClick %2 !== 0) {
-  random () ===0 ? item.classList.add('card_front') : item.classList.add('card_bug')
-  item.classList.remove('card_back');
-  } else {
-  window.location.reload();
-  }
-}
-
-  let cards = document.querySelectorAll('.card');
-  cards.forEach(item => item.addEventListener('click', end));
