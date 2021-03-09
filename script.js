@@ -14,7 +14,7 @@ level.forEach(function(element) {
       })
     });
 
-// Страт игры, создание и вывод карт на экран
+// Страт игры, создание и вывод карт на экран и клики по картам
 function chooseLevel(){
   container.classList.add('hidden');
   menu.classList.remove('hidden');
@@ -32,35 +32,36 @@ function chooseLevel(){
           numberCards = 9;
         break;
   }
- createCard = () => {
+   createCard = () => {
     let newCards = document.createElement('div');
-     newCards.classList = 'card_back';
-      newCards.classList.add ('card');
-     menu.classList.add ('hight_game');
-     menu.append(newCards);
-   }
-   for (let i = 0; i < numberCards; i++ ) {
-   createCard (numberCards);
-   }
+    newCards.classList = 'card_back';
+    newCards.classList.add ('card');
+    menu.classList.add ('hight_game');
+    menu.append(newCards);
+  }
 
-   function random() {
-       return Math.round(Math.random());
-     }
+  for (let i = 0; i < numberCards; i++ ) {
+    createCard (numberCards);
+  }
 
-     let numberClick = 0;
+  function random() {
+    return Math.round(Math.random());
+  }
 
-     function end () {
-     ++numberClick;
-     if (numberClick %2 !== 0) {
-     random () ===0 ? item.classList.add('card_front') : item.classList.add('card_bug')
-     item.classList.remove('card_back');
-     } else {
-     window.location.reload();
-     }
-   }
+  let numberClick = 0;
 
-   let cards = document.querySelectorAll('.card');
-   cards.forEach(item => item.addEventListener('click', end));
+  function end (event) {
+    ++numberClick;
+    if (numberClick %2 !== 0) {
+    random (event) ===0 ? event.currentTarget.classList.add('card_front') : event.currentTarget.classList.add ('card_bug')
+    event.currentTarget.classList.remove ('card_back');
+    } else {
+    window.location.reload();
+    }
+  }
+
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(item => item.addEventListener('click', end));
  }
 
    start.addEventListener('click', chooseLevel);
